@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 """
-Contains the TestUserDocs classes
+Contains the TestAmenityDocs classes
 """
-
 from datetime import datetime
 import inspect
 import models
-from models import user
-from models.base_model import BaseModel
 import pep8
 import unittest
+from models import amenity
+from models.base_model import BaseModel
+from models import user
+from os import getenv
+
 User = user.User
 
 
@@ -67,38 +69,43 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(user, "created_at"))
         self.assertTrue(hasattr(user, "updated_at"))
 
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db',
+                     "User email not valid")
     def test_email_attr(self):
         """Test that User has attr email, and it's an empty string"""
         user = User()
         self.assertTrue(hasattr(user, "email"))
-        if models.storage_t == 'db':
-            self.assertEqual(user.email, None)
-        else:
-            self.assertEqual(user.email, "")
+        self.assertEqual(user.email, None)
 
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db',
+                     "User password not valid")
     def test_password_attr(self):
         """Test that User has attr password, and it's an empty string"""
         user = User()
         self.assertTrue(hasattr(user, "password"))
-        if models.storage_t == 'db':
+        if getenv("HBNB_TYPE_STORAGE") == 'db':
             self.assertEqual(user.password, None)
         else:
             self.assertEqual(user.password, "")
 
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db',
+                     "User name not valid")
     def test_first_name_attr(self):
         """Test that User has attr first_name, and it's an empty string"""
         user = User()
         self.assertTrue(hasattr(user, "first_name"))
-        if models.storage_t == 'db':
+        if getenv('HBNB_TYPE_STORAGE') == "db":
             self.assertEqual(user.first_name, None)
         else:
             self.assertEqual(user.first_name, "")
 
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db',
+                     "User last name not valid")
     def test_last_name_attr(self):
         """Test that User has attr last_name, and it's an empty string"""
         user = User()
         self.assertTrue(hasattr(user, "last_name"))
-        if models.storage_t == 'db':
+        if getenv('HBNB_TYPE_STORAGE') == "db":
             self.assertEqual(user.last_name, None)
         else:
             self.assertEqual(user.last_name, "")
