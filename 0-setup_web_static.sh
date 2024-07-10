@@ -3,19 +3,17 @@
 mkdir -p /data/web_static/releases/test;
 echo 'Hello World!' > /data/web_static/releases/test/index.html;
 if [ -L /data/web_static/current ]; then
-	rm /data/web_static/current;
+	rm /data/web_static/current
+fi
 ln -s /data/web_static/releases/test/ /data/web_static/current;
 chown ubuntu /data/;
 SERVER_CONFIG="\
-htpp{
-	server {
-		listen 80;
-		listen [::]:80 default_server;
-		server_name vitalisalexia.tech;
-
-		location /hbnb_static {
+server {
+	listen 80;
+	listen [::]:80 default_server;
+	server_name vitalisalexia.tech;
+	location /hbnb_static {
 		alias /data/web_static/current/;
-		}
 	}
 }\
 "
