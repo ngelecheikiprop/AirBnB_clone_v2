@@ -29,5 +29,6 @@ def do_deploy(archive_path):
     sudo(f'rm -f /tmp/{file_name}')
     sudo(f'rm -f /data/web_static/current')
     extracted_file = os.path.splitext(file_name)[0]
-    sudo(f'ln -s /data/web_static/releases/{extracted_file} /data/web_static/current')
+    sudo(f'ln -s /data/web_static/releases/{extracted_file}\
+            /data/web_static/current')
     return True
