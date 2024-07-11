@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 'archieve web_static folder to deploy'
 from fabric.api import local, run, env, put
+from datetime import datetime
 import os
 env.hosts = ['54.237.18.27', '34.232.66.181']
 env.user = 'ubuntu'
 
 
 def do_pack():
-    from fabric.api import local
-    from datetime import datetime
     'compress the webstatic folder into versions folder'
     local('mkdir -p versions/')
     time_now = datetime.now().strftime("%Y%m%d%H%M%S")
