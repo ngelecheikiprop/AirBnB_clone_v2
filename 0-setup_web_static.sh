@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 #sets up webservers for deployment of webstatic
-mkdir -p /data/web_static/releases/test;
-echo 'Hello World!' > /data/web_static/releases/test/index.html;
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+#make the neccesary directories
+sudo mkdir -p /data/
+sudo mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/releases/
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
+
+#make a fake index html
+sudo echo 'Hey there am now learning to deploy' | sudo tee /data/web_static/releases/test/index.html;
 if [ -L /data/web_static/current ]; then
-	rm /data/web_static/current
+	sudo rm /data/web_static/current
 fi
-ln -s /data/web_static/releases/test/ /data/web_static/current;
-chown ubuntu /data/;
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current;
+sudo chown -R ubuntu:ubuntu /data/;
 SERVER_CONFIG="\
 server {
 	listen 80;
@@ -17,5 +27,5 @@ server {
 	}
 }\
 "
-echo -e "$SERVER_CONFIG" | tee /etc/nginx/sites-enabled/default;
-nginx -s reload;
+sudo echo -e "$SERVER_CONFIG" | sudo tee /etc/nginx/sites-enabled/default;
+sudo nginx -s reload;
