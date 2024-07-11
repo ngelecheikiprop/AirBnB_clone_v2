@@ -3,6 +3,7 @@
 from fabric.api import local
 
 def do_pack():
+    'compress the webstatic folder into versions folder'
     local('mkdir -p versions', shell=True)
     local('time_now=$(date "+%Y%m%d%H%M%S")', shell=True)
     local('file_name=web_static_$time_now.tgz', shell=True)
