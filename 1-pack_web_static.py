@@ -2,6 +2,7 @@
 'archieve web_static folder to deploy'
 from fabric.api import local
 
+
 def do_pack():
     'compress the webstatic folder into versions folder'
     local('mkdir -p versions', shell=True)
