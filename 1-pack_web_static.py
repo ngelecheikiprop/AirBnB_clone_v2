@@ -9,4 +9,6 @@ def do_pack():
     local('mkdir -p versions/')
     time_now = datetime.now().strftime("%Y%m%d%H%M%S")
     file_path = f"versions/web_static_{time_now}.tgz"
-    local(f'tar -cavf {file_path} web_static/*')
+    local(f'cd web_static && tar -czvf ../{file_path} * && cd -')
+    #local(f'tar -cavf {file_path} web_static/*')
+    return file_path
