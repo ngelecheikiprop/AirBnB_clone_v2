@@ -26,7 +26,8 @@ def do_deploy(archive_path):
         file_name = os.path.basename(archive_path)
         extracted_file = os.path.splitext(file_name)[0]
         sudo(f'mkdir -p /data/web_static/releases/{extracted_file}')
-        sudo(f'tar -xvf /tmp/{file_name} -C /data/web_static/releases/{extracted_file}')
+        sudo(f'tar -xvf /tmp/{file_name} \
+                -C /data/web_static/releases/{extracted_file}')
         sudo(f'rm -f /tmp/{file_name}')
         sudo(f'rm -f /data/web_static/current')
         sudo(f'ln -s /data/web_static/releases/{extracted_file}\
