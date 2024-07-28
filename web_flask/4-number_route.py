@@ -34,7 +34,7 @@ def display_python(text='is cool'):
 @app.route("/number/<int:n>", strict_slashes=False)
 def print_number(n):
     'display n only if number'
-    return f"{n}  is a number"
+    return f"{n} is a number"
 
 
 if __name__ == "__main__":
