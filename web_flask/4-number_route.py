@@ -23,6 +23,7 @@ def display_c_text(text):
     return f"C {text}"
 
 
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def display_python(text='is cool'):
     'display python then text given'
